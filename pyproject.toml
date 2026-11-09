@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lundeenlab-instruments"
+version = "0.1.0a0"
+description = "Small, modular Python drivers for laboratory instruments used in the Lundeen Lab"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{name = "Lundeen Lab, University of Ottawa"}]
+keywords = ["optics", "laboratory", "instrumentation", "power-meter", "automation"]
+classifiers = [
+  "Development Status :: 2 - Pre-Alpha",
+  "Intended Audience :: Science/Research",
+  "Programming Language :: Python :: 3",
+  "Topic :: Scientific/Engineering :: Physics",
+]
+dependencies = []
+
+[project.optional-dependencies]
+newport = ["PyVISA>=1.13"]
+visa-py = ["PyVISA>=1.13", "PyVISA-py>=0.7"]
+legacy = ["PyVISA>=1.13", "numpy>=1.24", "matplotlib>=3.7", "pylablib>=1.4", "pyserial>=3.5"]
+dev = ["pytest>=8", "build>=1"]
+
+[project.scripts]
+lundeen-instruments = "lundeen_instruments.cli:main"
+
+[project.urls]
+Repository = "https://github.com/uOttawaQuantumPhotonics/LundeenLab-Instruments"
+Issues = "https://github.com/uOttawaQuantumPhotonics/LundeenLab-Instruments/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["lundeen_instruments*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.setuptools.package-data]
+"lundeen_instruments.legacy" = ["CERCUO_MANIFEST.json"]
